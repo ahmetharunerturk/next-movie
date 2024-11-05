@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Movies from "@/components/Movies";
 
 export default async function Home({ searchParams }) {
@@ -19,7 +18,7 @@ export default async function Home({ searchParams }) {
   console.log(data);
 
   return (
-    <div className="flex items-center flex-wrap gap-3">
+    <div className="flex items-center justify-center flex-wrap gap-3">
       {data?.results?.map((dt, i) => (
         <Movies key={i} dt={dt} />
       ))}

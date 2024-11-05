@@ -1,19 +1,32 @@
 "use client";
 
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import React from 'react';
 
 const Movies = ({ dt }) => {
-  console.log(dt);
+
+  const router = useRouter();
+
 
   return (
-    <div className='w-[400px] h-[300px]'>
+    <div onClick={() => router.push(`/movie/${dt?.id}`)} className='min-w-[470px] relative imgContainer text-white cursor-pointer'>
       <Image
-        width={400}
+        width={470}
         height={300}
-        src={`https://image.tmdb.org/t/p/original${(dt?.backdrop_path || dt?.poster_path).trim()}`}
+        style={{ objectFit: 'cover' }}
+        src={`https://image.tmdb.org/t/p/original${(dt?.backdrop_path || dt?.poster_path || "").trim()}`}
         alt={dt?.title || "Movie Image"}
       />
+
+      <div className="absolute bottom-0 p-3 w-full h-full flex flex-col justify- opacity-0 hover:opacity-100 transition-opacity">
+        <div className="text-2xl font-bold ">
+          {dt.title}
+        </div>
+        <div>
+          {dt?.vote_average} - {dt?.release_date}
+        </div>
+      </div>
     </div>
   );
 }
